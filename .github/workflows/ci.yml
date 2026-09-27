@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: python -m pytest
+
+  # ------------------------------------------------------------------
+  # TP 6 : revue de chaque pull request par un agent, selon AGENTS.md.
+  # À activer pendant le TP : décommenter, ajouter le secret ANTHROPIC_API_KEY
+  # dans les paramètres du dépôt, et écrire le prompt de revue.
+  # ------------------------------------------------------------------
+  # revue-ia:
+  #   if: github.event_name == 'pull_request'
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #     issues: write
+  #     id-token: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: anthropics/claude-code-action@v1
+  #       with:
+  #         anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+  #         prompt: |
+  #           Relis cette pull request en appliquant AGENTS.md.
+  #           [À écrire pendant le TP : quoi signaler, quoi ignorer, sous quelle forme.]
