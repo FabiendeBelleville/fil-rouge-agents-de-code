@@ -5,7 +5,11 @@ from fastapi.testclient import TestClient
 
 from inscriptions.api import creer_application
 
-SESSION = {"formation": "Développer avec l'IA générative", "date_debut": "2026-11-16", "duree_jours": 2}
+SESSION = {
+    "formation": "Développer avec l'IA générative",
+    "date_debut": "2026-11-16",
+    "duree_jours": 2,
+}
 
 
 @pytest.fixture

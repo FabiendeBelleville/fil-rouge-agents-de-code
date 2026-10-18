@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date
-from enum import Enum
+from enum import StrEnum
 
 
-class StatutSession(str, Enum):
+class StatutSession(StrEnum):
     EN_ATTENTE = "en_attente"  # ouverte aux inscriptions, seuil de confirmation pas atteint
     CONFIRMEE = "confirmee"  # le seuil est atteint : la session aura lieu
     ANNULEE = "annulee"  # n'accepte plus d'inscription
